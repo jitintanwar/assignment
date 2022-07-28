@@ -11,8 +11,6 @@ namespace DAL
     {
         public async Task<bool> UpdateInventory(List<ProductDTO> dataToSave)
         {
-            // context.InventoryProducts.Add(dataToSave); context.SaveChanges() 
-
             return await Task.FromResult(false);
         }
     }
