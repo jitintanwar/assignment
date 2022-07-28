@@ -8,8 +8,22 @@ using System.Threading.Tasks;
 
 namespace Assignment.Source
 {
-    public abstract class BaseReader : ISource
+    public abstract class BaseReader<T> : ISource
     {
-        public abstract List<StandardDTO> ReadData(string location);
+        public abstract List<ProductDTO> ReadData(string location);
+
+        public List<ProductDTO> ConvertToProductDTO(List<T> mapping)
+        {
+            var result = new List<ProductDTO>();
+            mapping.ForEach(x => result.Add(GetStandarDto(x)));
+            return result;
+        }
+
+        public abstract ProductDTO GetStandarDto(T? x);        
+
+        public BaseReader()
+        {
+            // Do basic initialization, if any
+        }
     }
 }

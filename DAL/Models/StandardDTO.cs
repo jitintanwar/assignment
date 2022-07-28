@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-    public class StandardDTO
+    public class ProductDTO
     {
         public string Name { get; set; }
         public string Categories { get; set; }

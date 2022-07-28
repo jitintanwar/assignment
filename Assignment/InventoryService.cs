@@ -9,12 +9,14 @@ namespace Assignment
         private readonly IConfigRepository configRepository;
         private readonly ReaderFactory readerFactory;
         private readonly InputValidator inputValidator;
+        private readonly IInventoryRepository inventoryRepository;
 
-        public InventoryService(IConfigRepository configRepository, ReaderFactory readerFactory, InputValidator inputValidator)
+        public InventoryService(IConfigRepository configRepository, IInventoryRepository inventoryRepository, ReaderFactory readerFactory, InputValidator inputValidator)
         {
             this.configRepository = configRepository;
             this.readerFactory = readerFactory;
             this.inputValidator = inputValidator;
+            this.inventoryRepository = inventoryRepository;
         }
         public async Task Process(string clientName, string FileName)
         {
@@ -36,15 +38,17 @@ namespace Assignment
                                 Console.WriteLine($"importing: Name: {item.Name}; Categories: {item.Categories}; Twitter: {item.Twitter}");
                             }
 
-                            // Persist the data; Only code skeleton.
+                            await inventoryRepository.UpdateInventory(data);
                         }
-
+                        return;
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine($"Error reading data: ClientName: {clientName}, FileName: {FileName}, DateTime: {DateTime.Now}");
+                        return;
                     }                    
-                }                
+                }
+                throw new ApplicationException($"Unsupported client {clientName}");
             }
         }
     }

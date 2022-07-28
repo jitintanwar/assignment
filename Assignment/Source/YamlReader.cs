@@ -11,9 +11,14 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace Assignment.Source
 {
-    public class YamlReader : BaseReader
+    public class YamlReader : BaseReader<YamlRoot>
     {
-        public override List<StandardDTO> ReadData(string location)
+        public override ProductDTO GetStandarDto(YamlRoot? x)
+        {
+            return new ProductDTO { Categories = x.tags, Name = x.name , Twitter = x.twitter};   
+        }
+
+        public override List<ProductDTO> ReadData(string location)
         {
             try
             {
@@ -22,27 +27,16 @@ namespace Assignment.Source
                 .Build();
 
                 var myConfig = deserializer.Deserialize<List<YamlRoot>>(File.ReadAllText(location));
-                return ConvertToStandardDTO(myConfig);
+                return ConvertToProductDTO(myConfig);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error reading file");
-                throw ex;
+                throw;
             }
         }
 
-        private List<StandardDTO> ConvertToStandardDTO(List<YamlRoot> mapping)
-        {
-            var result = new List<StandardDTO>();
-            mapping.ForEach(x => result.Add(new StandardDTO
-            {
-                Name = x.name,
-                Categories = String.Join(", ", x.tags),
-                Twitter = x.twitter,
-            }
-            ));
-            return result;
-        }
+         
     }
 
     public class YamlRoot

@@ -15,6 +15,7 @@ using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((_, services) =>
         services.AddHostedService<ConsoleHostedService>()
         .AddSingleton<IConfigRepository, SqlConfigRepopsitory>()
+        .AddSingleton<IInventoryRepository, SqlProductRepository>()
         .AddSingleton<InventoryService>()
         .AddSingleton<ReaderFactory>()
         .AddSingleton<YamlReader>()

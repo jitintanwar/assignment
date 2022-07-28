@@ -35,13 +35,6 @@ namespace DAL
 
             var clientconfig = _clients.FirstOrDefault(x => x.ClientName == clientName);
             return await Task.FromResult(clientconfig);
-        }
-
-        public Task<bool> SaveData(List<StandardDTO> dataToSave)
-        {
-            // context.InventoryProducts.Add(dataToSave); context.SaveChanges() 
-
-            return Task.FromResult(false);
-        }
+        }        
     }
 }

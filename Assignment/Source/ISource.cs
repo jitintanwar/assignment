@@ -10,6 +10,6 @@ namespace Assignment.Source
 {
     public interface ISource
     {
-        List<StandardDTO> ReadData(string location);
+        List<ProductDTO> ReadData(string location);
     }
 }

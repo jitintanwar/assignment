@@ -22,18 +22,5 @@ namespace Tests.Utilities
             // Assert
             Assert.True(result);
         }
-
-        [Fact]
-        public void ValidateReturnsFalse()
-        {
-            // Assert
-            var inputValidator = new InputValidator();
-
-            // Act
-            var result = inputValidator.Validate("capterra", "");
-
-            // Assert
-            Assert.False(result);
-        }
     }
 }

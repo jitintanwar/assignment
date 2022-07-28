@@ -9,38 +9,34 @@ using System.Threading.Tasks;
 
 namespace Assignment.Source
 {
-    public class JsonReader : BaseReader
+    public class JsonReader : BaseReader<Product>
     {
-        public override List<StandardDTO> ReadData(string location)
+        public override ProductDTO GetStandarDto(Product? x)
+        {
+            return new ProductDTO
+            {
+                Name = x.title,
+                Categories = String.Join(", ", x.categories),
+                Twitter = x.twitter,
+            };
+        }
+
+        public override List<ProductDTO> ReadData(string location)
         {
             try
-            {
-                using (StreamReader r = new StreamReader(location))
-                {
-                    string json = r.ReadToEnd();
-                    var jsondata = JsonConvert.DeserializeObject<Root>(json);
-                    return ConvertToStandardDTO(jsondata);
-                }
+            {    
+                string json = File.ReadAllText(location);
+                var jsondata = JsonConvert.DeserializeObject<Root>(json);
+                return ConvertToProductDTO(jsondata.products);
+                
             }
             catch(Exception ex)
             {
                 Console.WriteLine($"Error reading file");
-                throw ex;
+                throw;
             }
         }
 
-        private List<StandardDTO> ConvertToStandardDTO(Root root)
-        {
-            var result = new List<StandardDTO>();
-            root.products.ForEach(x => result.Add(
-                new StandardDTO
-                {
-                    Name = x.title,
-                    Categories = String.Join(", ", x.categories),
-                    Twitter = x.twitter,
-                }
-            ));
-            return result;
-        }
+        
     }
 }

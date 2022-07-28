@@ -10,9 +10,7 @@ namespace Assignment.Utilities
     {
         public bool Validate(string arg1, string arg2)
         {
-            if (string.IsNullOrEmpty(arg1) || string.IsNullOrEmpty(arg2)) 
-                return false;
-            
+            // Do other business level validations
             return true;
         }
     }
