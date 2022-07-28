@@ -24,11 +24,3 @@ using IHost host = Host.CreateDefaultBuilder(args)
     .Build();
 
 host.RunAsync();
-
-/* To-do
- * 1. Where to add DAL layer tests
- * 1. Base reader / Isource in Source - Which on is required...
- * 2. Repository pattern for db connection
- * 3. Add unit tests
- * 
- */
