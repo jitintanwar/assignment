@@ -1,7 +1,7 @@
 
 # Saas products inventory service
 
-It reads input from the user and outputs the data on console.
+A console app that reads input from the user and process the data from multiple sources.
 
 
 ## How to run
