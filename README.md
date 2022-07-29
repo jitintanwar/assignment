@@ -1,7 +1,7 @@
 
 # Saas products inventory service
 
-A console app that reads input from the user and process the data from multiple sources.
+A .net 6 console app that reads input from the user and process the data from multiple sources.
 
 
 ## How to run
